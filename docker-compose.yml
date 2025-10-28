@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # Production service
   app:
     build:
       context: .
@@ -15,7 +16,7 @@ services:
     networks:
       - app-network
 
-  # Development service (optional - for development with hot reload)
+  # Development service with hot reload
   app-dev:
     build:
       context: .
@@ -35,6 +36,22 @@ services:
       - app-network
     profiles:
       - dev
+
+  # Service to run npm commands without installing Node.js on host
+  npm:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    working_dir: /app
+    container_name: company-npm
+    networks:
+      - app-network
+    profiles:
+      - tools
+    command: tail -f /dev/null  # Keep container running
 
 networks:
   app-network:

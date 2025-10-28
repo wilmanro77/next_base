@@ -8,9 +8,9 @@ pnpm-debug.log*
 # Next.js
 .next/
 out/
+build/
 
 # Production
-build/
 dist/
 
 # Environment variables
@@ -19,13 +19,6 @@ dist/
 .env.development.local
 .env.test.local
 .env.production.local
-
-# Vercel
-.vercel
-
-# TypeScript
-*.tsbuildinfo
-next-env.d.ts
 
 # IDE
 .vscode/
@@ -36,6 +29,15 @@ next-env.d.ts
 # OS
 .DS_Store
 Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
 
 # Logs
 logs
@@ -82,21 +84,26 @@ jspm_packages/
 .cache
 .parcel-cache
 
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+
+# Storybook build outputs
+.out
+.storybook-out
 
 # Temporary folders
 tmp/
 temp/
 
-# Docker
-.dockerignore
-Dockerfile*
-docker-compose*
-
-# Git
-.git/
-.gitignore
-
-# README
-README.md
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -13,7 +13,11 @@
     "docker:down": "docker-compose down",
     "docker:dev": "docker-compose --profile dev up -d",
     "docker:logs": "docker-compose logs -f",
-    "docker:clean": "docker-compose down -v && docker system prune -f"
+    "docker:clean": "docker-compose down -v && docker system prune -f",
+    "docker:npm": "docker-compose --profile tools run --rm npm",
+    "docker:install": "docker-compose --profile tools run --rm npm npm install",
+    "docker:build-app": "docker-compose --profile tools run --rm npm npm run build",
+    "docker:lint": "docker-compose --profile tools run --rm npm npm run lint"
   },
   "dependencies": {
     "next": "^14.0.0",
