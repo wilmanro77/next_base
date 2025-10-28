@@ -1,0 +1,39 @@
+# Development Dockerfile for hot reload
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install dependencies
+COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
+RUN \
+  if [ -f pnpm-lock.yaml ]; then \
+    npm install -g pnpm && pnpm install; \
+  elif [ -f yarn.lock ]; then \
+    npm install -g yarn && yarn install; \
+  elif [ -f package-lock.json ]; then \
+    npm install; \
+  else \
+    echo "Lockfile not found." && exit 1; \
+  fi
+
+# Copy source code
+COPY . .
+
+# Expose the development port
+EXPOSE 3750
+
+# Set environment variables
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Start the development server
+CMD \
+  if [ -f pnpm-lock.yaml ]; then \
+    npm install -g pnpm && pnpm run dev; \
+  elif [ -f yarn.lock ]; then \
+    npm install -g yarn && yarn dev; \
+  elif [ -f package-lock.json ]; then \
+    npm run dev; \
+  else \
+    echo "Lockfile not found." && exit 1; \
+  fi
