@@ -10,10 +10,8 @@ RUN \
     npm install -g pnpm && pnpm install; \
   elif [ -f yarn.lock ]; then \
     npm install -g yarn && yarn install; \
-  elif [ -f package-lock.json ]; then \
-    npm install; \
   else \
-    echo "Lockfile not found." && exit 1; \
+    npm install; \
   fi
 
 # Copy source code

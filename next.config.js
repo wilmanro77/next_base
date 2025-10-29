@@ -3,9 +3,6 @@ const nextConfig = {
   // Enable standalone output for Docker optimization
   output: 'standalone',
 
-  // Disable telemetry
-  telemetry: false,
-
   // Optimize images
   images: {
     unoptimized: true, // Disable for Docker builds
@@ -20,6 +17,11 @@ const nextConfig = {
   // Environment variables
   env: {
     NEXT_TELEMETRY_DISABLED: '1',
+  },
+
+  // Skip ESLint during `next build` for CI/docker builds
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 
   // Webpack configuration

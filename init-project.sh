@@ -42,7 +42,15 @@ echo -e "${GREEN}📁 Creando directorio del proyecto: $PROJECT_DIR${NC}"
 mkdir -p "$PROJECT_DIR"
 
 echo -e "${GREEN}📋 Copiando archivos de la plantilla...${NC}"
-cp -r . "$PROJECT_DIR"/
+# Evitar copias recursivas cuando el destino está dentro del origen
+# Requiere rsync (disponible por defecto en macOS/Linux)
+rsync -a ./ "$PROJECT_DIR"/ \
+  --exclude "$PROJECT_DIR" \
+  --exclude ".git" \
+  --exclude "node_modules" \
+  --exclude ".next" \
+  --exclude "out" \
+  --exclude "build"
 
 # Remover archivos que no deben copiarse
 cd "$PROJECT_DIR"

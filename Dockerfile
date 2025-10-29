@@ -17,7 +17,7 @@ RUN \
   elif [ -f package-lock.json ]; then \
     npm ci --only=production; \
   else \
-    echo "Lockfile not found." && exit 1; \
+    echo "Lockfile not found. Running npm install to generate it..." && npm install --production=false; \
   fi
 
 # Rebuild the source code only when needed
@@ -36,10 +36,8 @@ RUN \
     npm install -g pnpm && pnpm run build; \
   elif [ -f yarn.lock ]; then \
     npm install -g yarn && yarn build; \
-  elif [ -f package-lock.json ]; then \
-    npm run build; \
   else \
-    echo "Lockfile not found." && exit 1; \
+    npm run build; \
   fi
 
 # Production image, copy all the files and run next

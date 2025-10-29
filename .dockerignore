@@ -34,10 +34,7 @@ Thumbs.db
 .git
 .gitignore
 
-# Docker
-Dockerfile*
-docker-compose*
-.dockerignore
+# Docker (no excluir archivos de build)
 
 # Logs
 logs
